@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1e1e1e; /* Dark background */
+            color: #ffffff; /* White text */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #ff9800; /* Orange for the heading */
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: #333333; /* Dark grey for the form */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            max-width: 350px;
+            width: 90%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff9800; /* Orange for labels */
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #ff9800; /* Orange border */
+            border-radius: 10px;
+            background-color: #262626; /* Darker grey background */
+            color: #ffffff; /* White text */
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff9800; /* Orange button */
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e67e22; /* Slightly darker orange on hover */
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #cgpa {
+            width: 120px;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 20px;
+            background-color: #4caf50; /* Green background */
+            color: #ffffff; /* White text */
+            margin: 10px auto;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            #cgpa {
+                width: 100px;
+                padding: 8px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>CGPA Calculator</h1>
+    <form id="cgpaForm">
+        <label for="dsa">SE:</label>
+        <input type="number" id="dsa" required><br>
+
+        <label for="co">FSD:</label>
+        <input type="number" id="co" required><br>
+
+        <label for="ade">ST:</label>
+        <input type="number" id="ade" required><br>
+
+        <label for="math">DMDW:</label>
+        <input type="number" id="math" required><br>
+
+        <label for="bio">OE_RE:</label>
+        <input type="number" id="bio" required><br>
+
+        <label for="java">Internship:</label>
+        <input type="number" id="java" required><br>
+
+        <label for="mo">Mini Project:</label>
+        <input type="number" id="mo" required><br>
+
+        <label for="scr">ST Lab:</label>
+        <input type="number" id="scr" required><br>
+
+        <button type="button" onclick="calculateCGPA()">Calculate CGPA</button>
+    </form>
+
+    <div id="result">
+        <label for="cgpa">Your CGPA:</label>
+        <input type="text" id="cgpa" readonly>
+    </div>
+
+    <script>
+        function calculateCGPA() {
+            var dsaMarks = parseInt(document.getElementById("dsa").value);
+            var coMarks = parseInt(document.getElementById("co").value);
+            var adeMarks = parseInt(document.getElementById("ade").value);
+            var mathMarks = parseInt(document.getElementById("math").value);
+            var bioMarks = parseInt(document.getElementById("bio").value);
+            var javaMarks = parseInt(document.getElementById("java").value);
+            var moMarks = parseInt(document.getElementById("mo").value);
+            var scrMarks = parseInt(document.getElementById("scr").value);
+            
+            var totalCredits = 22;
+            var totalGradePoints = 0;
+
+            totalGradePoints += getGradePoints(dsaMarks) * 4;
+            totalGradePoints += getGradePoints(coMarks) * 3;
+            totalGradePoints += getGradePoints(adeMarks) * 3;
+            totalGradePoints += getGradePoints(mathMarks) * 3;
+            totalGradePoints += getGradePoints(bioMarks) * 3;
+            totalGradePoints += getGradePoints(javaMarks) * 3;
+            totalGradePoints += getGradePoints(moMarks) * 2;
+            totalGradePoints += getGradePoints(scrMarks) * 1;
+
+            var cgpa = (totalGradePoints / totalCredits).toFixed(2);
+            document.getElementById("cgpa").value = cgpa;
+        }
+
+        function getGradePoints(marks) {
+            if (marks >= 90) {
+                return 10;
+            } else if (marks >= 80) {
+                return 9;
+            } else if (marks >= 70) {
+                return 8;
+            } else if (marks >= 60) {
+                return 7;
+            } else if (marks >= 50) {
+                return 6;
+            } else if (marks >= 45) {
+                return 5;
+            } else if (marks >= 40) {
+                return 4;
+            } else {
+                return 0;
+            }
+        }
+    </script>
+</body>
+</html>
